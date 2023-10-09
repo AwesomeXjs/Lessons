@@ -24,3 +24,20 @@ button:active {
 .activeLink {
 	color: white;
 }
+nav a {
+	margin-right: 10px;
+}
+
+.courses-wrapper {
+	display: flex;
+	flex-direction: column;
+	padding-top: 50px;
+}
+.courses-wrapper a {
+	font-size: 30px;
+	margin-bottom: 10px;
+	text-decoration: none;
+}
+.courses-wrapper a:hover {
+	text-decoration: underline;
+}

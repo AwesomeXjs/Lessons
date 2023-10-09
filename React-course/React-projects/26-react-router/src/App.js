@@ -1,11 +1,12 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import './App.css'
 import Home from './components/Home'
 import NotFound from './components/NotFound'
 import About from './components/About'
 import Contacs from './components/Contacs'
 import MainLayout from './layouts/MainLayout'
+import Courses from './components/Courses'
+import SingleCourse from './components/SingleCourse'
 
 function App() {
 	return (
@@ -20,6 +21,14 @@ function App() {
 						<Route path='*' element={<NotFound />} />
 						<Route path='about' element={<About />} />
 						<Route path='contacts' element={<Contacs />} />
+						<Route path='courses' element={<Courses />} />
+						{/* использование Navigate для переадресации: 
+						replace - заменяет в истории, чтобы не сохранять переадресованную страницу*/}
+						<Route
+							path='courses-as'
+							element={<Navigate to={'courses'} replace />}
+						/>
+						<Route path='courses/:slug' element={<SingleCourse />} />
 					</Route>
 				</Routes>
 			</div>

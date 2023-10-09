@@ -25,6 +25,9 @@ const Menu = () => {
 			<NavLink className={activeLink} to='contacts'>
 				Contacts
 			</NavLink>
+			<NavLink className={activeLink} to='courses'>
+				Courses
+			</NavLink>
 		</nav>
 	)
 }
