@@ -1,17 +1,12 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { v4 as uuidv4 } from 'uuid'
 import { addBook } from '../../redux/books/actionCreators'
+import createBookWithID from '../../custom/createBookWithID'
 import booksData from '../../data/books.json'
 import './BookForm.css'
 
 const BookForm = () => {
-	const [data, setData] = useState({
-		title: '',
-		author: '',
-		id: uuidv4(),
-		isFavorite: false,
-	})
+	const [data, setData] = useState(createBookWithID({ title: '', author: '' }))
 	const dispatch = useDispatch()
 
 	const handleSubmit = event => {
@@ -19,25 +14,12 @@ const BookForm = () => {
 		if (data.author && data.title) {
 			//dispatch action
 			dispatch(addBook(data))
-			setData({
-				title: '',
-				author: '',
-				id: uuidv4(),
-				isFavorite: false,
-			})
+			setData(createBookWithID({ title: '', author: '' }))
 		}
 	}
 	const handleAddRandomBook = () => {
 		const randomIndex = Math.floor(Math.random() * booksData.length)
-		const randomBook = booksData[randomIndex]
-
-		const randomBookWithIF = {
-			...randomBook,
-			id: uuidv4(),
-			isFavorite: false,
-		}
-
-		dispatch(addBook(randomBookWithIF))
+		dispatch(addBook(createBookWithID(booksData[randomIndex])))
 	}
 	return (
 		<div className='app-block book-form'>
