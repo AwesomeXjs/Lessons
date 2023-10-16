@@ -1,4 +1,4 @@
-# React project for the react course
+# Book library app
 
 ## Available Scripts
 
