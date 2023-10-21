@@ -12,8 +12,11 @@
 .filter input[type='text'] {
 	width: 80%;
 	padding: 8px;
-	border: 1px solid #ccc;
+	border: 2px solid #ccc;
 	border-radius: 3px;
+}
+.filter input:focus {
+	border: 2px solid #007bff;
 }
 
 .filter button {
