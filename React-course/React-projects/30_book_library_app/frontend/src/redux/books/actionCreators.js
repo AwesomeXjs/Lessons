@@ -20,3 +20,8 @@ export const addFavoriteBook = id => {
 		payload: id,
 	}
 }
+export const favoriteList = () => {
+	return {
+		type: actionTypes.FAVORITE_LIST,
+	}
+}

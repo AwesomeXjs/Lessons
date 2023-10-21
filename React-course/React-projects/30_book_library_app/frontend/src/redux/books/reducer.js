@@ -12,7 +12,8 @@ const booksReducer = (state = initialState, action) => {
 			return state.map(e =>
 				e.id === action.payload ? { ...e, isFavorite: !e.isFavorite } : { ...e }
 			)
-
+		case actionTypes.FAVORITE_LIST:
+			return state.filter(e => e.isFavorite === true)
 		default:
 			return state
 	}

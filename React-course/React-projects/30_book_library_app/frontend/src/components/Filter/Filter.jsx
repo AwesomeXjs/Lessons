@@ -4,14 +4,18 @@ import {
 	selectTitleFilter,
 	setAuthorFilter,
 	setTitleFilter,
+	setIsFavorite,
 	selectAuthorFilter,
+	selectIsFavorites,
 } from '../../redux/slices/filterSlice'
 import './Filter.css'
+import { favoriteList } from '../../redux/books/actionCreators'
 
 const Filter = () => {
 	const dispatch = useDispatch()
 	const titleFilter = useSelector(selectTitleFilter)
 	const authorFilter = useSelector(selectAuthorFilter)
+	const favoriteCheck = useSelector(selectIsFavorites)
 
 	const handleTitleFilterChanger = e => {
 		dispatch(setTitleFilter(e.target.value))
@@ -19,9 +23,17 @@ const Filter = () => {
 	const handleAuthorFilterChanger = e => {
 		dispatch(setAuthorFilter(e.target.value))
 	}
+	const handleFavoritesList = () => {
+		dispatch(favoriteList())
+	}
+
+	const handleFavoriteFilter = () => {
+		dispatch(setIsFavorite())
+	}
 	const deleteFilters = () => {
 		dispatch(resetFilters())
 	}
+
 	return (
 		<div>
 			<div className='app-block filter'>
@@ -42,6 +54,18 @@ const Filter = () => {
 							placeholder='Filter by author...'
 						/>
 					</div>
+					<div className='filter-group'>
+						<input
+							type='checkbox'
+							value={favoriteCheck}
+							onChange={handleFavoriteFilter}
+						/>
+						Only Favorite
+					</div>
+
+					<button type='button' onClick={handleFavoritesList}>
+						Favorites
+					</button>
 					<button type='button' onClick={deleteFilters}>
 						Reset Filters
 					</button>
