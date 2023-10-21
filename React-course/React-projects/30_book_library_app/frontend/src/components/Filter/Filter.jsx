@@ -9,7 +9,6 @@ import {
 	selectIsFavorites,
 } from '../../redux/slices/filterSlice'
 import './Filter.css'
-import { favoriteList } from '../../redux/books/actionCreators'
 
 const Filter = () => {
 	const dispatch = useDispatch()
@@ -22,9 +21,6 @@ const Filter = () => {
 	}
 	const handleAuthorFilterChanger = e => {
 		dispatch(setAuthorFilter(e.target.value))
-	}
-	const handleFavoritesList = () => {
-		dispatch(favoriteList())
 	}
 
 	const handleFavoriteFilter = () => {
@@ -62,10 +58,6 @@ const Filter = () => {
 						/>
 						Only Favorite
 					</div>
-
-					<button type='button' onClick={handleFavoritesList}>
-						Favorites
-					</button>
 					<button type='button' onClick={deleteFilters}>
 						Reset Filters
 					</button>

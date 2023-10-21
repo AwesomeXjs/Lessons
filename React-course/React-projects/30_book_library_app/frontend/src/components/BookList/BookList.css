@@ -66,6 +66,7 @@
 	color: red;
 	transition: 0.2s ease-in;
 }
+
 .favorite-icon {
 	cursor: pointer;
 	font-size: 30px;
