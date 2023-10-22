@@ -4,6 +4,7 @@ import { addBook, fetchBook } from '../../redux/slices/booksSlice.js'
 import createBookWithID from '../../custom/createBookWithID'
 import booksData from '../../data/books.json'
 import './BookForm.css'
+import { setError } from '../../redux/slices/errorSlice.js'
 
 const BookForm = () => {
 	const [data, setData] = useState(createBookWithID({ title: '', author: '' }))
@@ -15,6 +16,8 @@ const BookForm = () => {
 			//dispatch action
 			dispatch(addBook(createBookWithID(data, 'manual')))
 			setData(createBookWithID({ title: '', author: '' }))
+		} else {
+			dispatch(setError('Поля пустые!'))
 		}
 	}
 	const handleAddRandomBook = () => {
