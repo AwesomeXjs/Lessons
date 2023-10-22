@@ -7,7 +7,7 @@ const bookSlice = createSlice({
 	initialState,
 	reducers: {
 		addBook: (state, action) => {
-			return [...state, action.payload]
+			state.push(action.payload)
 		},
 		deleteBook: (state, action) => {
 			return state.filter(e => e.id !== action.payload)
