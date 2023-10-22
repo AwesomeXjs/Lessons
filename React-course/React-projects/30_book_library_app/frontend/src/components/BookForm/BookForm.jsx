@@ -1,7 +1,11 @@
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { ImSpinner } from 'react-icons/im'
-import { addBook, fetchBook } from '../../redux/slices/booksSlice.js'
+import {
+	addBook,
+	fetchBook,
+	selectIsLoading,
+} from '../../redux/slices/booksSlice.js'
 import createBookWithID from '../../custom/createBookWithID'
 import booksData from '../../data/books.json'
 import './BookForm.css'
@@ -9,7 +13,7 @@ import { setError } from '../../redux/slices/errorSlice.js'
 
 const BookForm = () => {
 	const [data, setData] = useState(createBookWithID({ title: '', author: '' }))
-	const [isLoading, setIsLoading] = useState(false)
+	const isLoading = useSelector(selectIsLoading)
 	const dispatch = useDispatch()
 
 	const handleSubmit = event => {
@@ -27,14 +31,10 @@ const BookForm = () => {
 		dispatch(addBook(createBookWithID(booksData[randomIndex], 'random')))
 	}
 
-	const handleAddRandomBookViaApi = async () => {
-		try {
-			setIsLoading(true)
-			await dispatch(fetchBook('http://localhost:4000/random-book-delayed'))
-		} finally {
-			setIsLoading(false)
-		}
+	const handleAddRandomBookViaApi = () => {
+		dispatch(fetchBook('http://localhost:5000/random-book-delayed'))
 	}
+
 	return (
 		<div className='app-block book-form'>
 			<h2>Add new book</h2>

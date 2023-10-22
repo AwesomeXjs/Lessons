@@ -3,7 +3,10 @@ import axios from 'axios'
 import createBookWithID from '../../custom/createBookWithID'
 import { setError } from './errorSlice'
 
-const initialState = []
+const initialState = {
+	books: [],
+	isLoadingViaApi: false,
+}
 
 export const fetchBook = createAsyncThunk(
 	'books/fetchBooks',
@@ -13,7 +16,7 @@ export const fetchBook = createAsyncThunk(
 			return res.data
 		} catch (error) {
 			thunkAPI.dispatch(setError(error.message))
-			throw error
+			return thunkAPI.rejectWithValue(error)
 		}
 	}
 )
@@ -23,26 +26,45 @@ const bookSlice = createSlice({
 	initialState,
 	reducers: {
 		addBook: (state, action) => {
-			state.push(action.payload)
+			state.books.push(action.payload)
 		},
 		deleteBook: (state, action) => {
-			return state.filter(e => e.id !== action.payload)
+			return {
+				...state,
+				books: state.books.filter(e => e.id !== action.payload),
+			}
 		},
 		addFavoriteBook: (state, action) => {
-			return state.map(e =>
-				e.id === action.payload ? { ...e, isFavorite: !e.isFavorite } : { ...e }
-			)
+			return {
+				...state,
+				books: state.books.map(e =>
+					e.id === action.payload
+						? { ...e, isFavorite: !e.isFavorite }
+						: { ...e }
+				),
+			}
 		},
 	},
 	extraReducers: builder => {
+		builder.addCase(fetchBook.pending, state => {
+			state.isLoadingViaApi = true
+		})
 		builder.addCase(fetchBook.fulfilled, (state, action) => {
-			if (action.payload.title && action.payload.author) {
-				state.push(createBookWithID(action.payload, 'API'))
+			state.isLoadingViaApi = false
+			if (action?.payload?.title && action?.payload?.author) {
+				state.books.push(createBookWithID(action.payload, 'API'))
 			}
 		})
+		builder.addCase(fetchBook.rejected, state => {
+			state.isLoadingViaApi = false
+		})
 	},
-	/* extraReducers: {
+	/* 	extraReducers: {
+		[fetchBook.pending]: state => {
+			state.isLoadingViaApi = true
+		},
 		[fetchBook.fulfilled]: (state, action) => {
+			state.isLoadingViaApi = false
 			if (action.payload.title && action.payload.author) {
 				state.push(createBookWithID(action.payload, 'API'))
 			}
@@ -51,5 +73,7 @@ const bookSlice = createSlice({
 })
 
 export const { addBook, deleteBook, addFavoriteBook } = bookSlice.actions
+export const selectBooks = state => state.books.books
+export const selectIsLoading = state => state.books.isLoadingViaApi
 
 export default bookSlice.reducer
