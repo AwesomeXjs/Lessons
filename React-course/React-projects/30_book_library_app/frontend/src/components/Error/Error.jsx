@@ -14,7 +14,7 @@ const Error = () => {
 			dispatch(clearError())
 		}
 	}, [errorMassage, dispatch])
-	return <ToastContainer position='top-right' autoClose={2000} />
+	return <ToastContainer theme='dark' position='top-right' autoClose={2000} />
 }
 
 export default Error

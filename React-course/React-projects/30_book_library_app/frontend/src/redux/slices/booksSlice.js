@@ -34,20 +34,20 @@ const bookSlice = createSlice({
 			)
 		},
 	},
-	/* extraReducers: builder => {
+	extraReducers: builder => {
 		builder.addCase(fetchBook.fulfilled, (state, action) => {
 			if (action.payload.title && action.payload.author) {
 				state.push(createBookWithID(action.payload, 'API'))
 			}
 		})
-	}, */
-	extraReducers: {
+	},
+	/* extraReducers: {
 		[fetchBook.fulfilled]: (state, action) => {
 			if (action.payload.title && action.payload.author) {
 				state.push(createBookWithID(action.payload, 'API'))
 			}
 		},
-	},
+	}, */
 })
 
 export const { addBook, deleteBook, addFavoriteBook } = bookSlice.actions
