@@ -82,3 +82,25 @@ const switchReducer = (state, action) => {
 
 /* Redux создает текущее состояние на основании начального состояния и последовательности действий */
 /* Зная начальное состояние и все дейсвтия которые были совершены то можно восстановить любое состояние приложения в прошлом */
+
+function sum() {
+	let count = 0
+	function increment() {
+		count++
+		return count
+	}
+	function decrement() {
+		count--
+		return count
+	}
+	return {
+		count,
+		increment,
+		decrement,
+	}
+}
+console.log(sum())
+
+const result = sum()
+console.log(result.increment())
+console.log(result.increment())
