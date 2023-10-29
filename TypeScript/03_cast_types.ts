@@ -5,5 +5,5 @@
 const castEx: boolean = o20('ok')
 
 //конструкция as unknown (мы говорим ts что не знаем какой там тип) => as любой_тип (поэтому приведи к требуемому типу)
-const castEx2 = o20('ok') as unknown as boolean
-console.log(castEx) // null
+/* const castEx2 = o20('ok') as unknown as boolean */
+/* console.log(castEx) // null */

@@ -45,6 +45,7 @@ const enum error2 {
 }
 
 //Если тип переменной состоит из нескольких типов (обьединенные) - можно использовать const enum который потом можно заменить вместо перечисления типов
+
 const enum StatusEnum {
 	OK = 'ok',
 	FALSE = 'false',
@@ -53,3 +54,14 @@ const enum StatusEnum {
 type Status1 = {
 	status: StatusEnum
 }
+
+const infoStatus: Status1 = {
+	status: StatusEnum.OK,
+}
+
+function exampleStatus(info: Status1) {
+	if (info.status === 'ok') {
+		console.log(info.status)
+	}
+}
+exampleStatus(infoStatus)
