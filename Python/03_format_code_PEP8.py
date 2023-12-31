@@ -10,12 +10,6 @@ myName('Bogdan')
 # PEP8 - документ, описывающий рекомендации по написанию кода
 
 
-def long_function_name(
-    var_one, var_two, var_three, var_four
-):
-    print(var_one)
-
-
 # некоторые выдержки из PEP8
 # 1. Для отступов использовать пробелы, а не TAB
 # 2. Длина строк не более 79 символов
